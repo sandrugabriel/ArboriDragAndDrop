@@ -8,18 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ArboriDragAndDrop
+namespace ArboriDragAndDrop.View.Mockups
 {
-    public partial class Form1 : Form
+    public partial class MockupCards : Form
     {
-        public Form1()
+        public MockupCards()
         {
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
-            this.Close();
+
         }
     }
 }
