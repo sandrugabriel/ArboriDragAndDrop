@@ -10,24 +10,25 @@ using System.Windows.Forms;
 
 namespace ArboriDragAndDrop.Arbori
 {
-    public class Arbor : IArbor
+    public class Arbor<T> : IArbor<T> where T : Panel
     {
 
-        private TreeNode root = null;
+        private TreeNode<T> root = null;
 
-        public TreeNode getNode() { return root; }
+        public TreeNode<T> getNode() { return root; }
 
-        public string find(string cautat)
+        public T find(T cautat)
         {
-            TreeNode searched = find(root, cautat);
+            TreeNode<T> searched = find(root, cautat);
             if (searched != null)
             {
                 return searched.Data;
             }
-            return null;
+
+            return cautat;
         }
 
-        public TreeNode find(TreeNode current, String cautat)
+        public TreeNode<T> find(TreeNode<T> current, T cautat)
         {
 
 
@@ -51,13 +52,13 @@ namespace ArboriDragAndDrop.Arbori
 
         }
 
-        public void add(string parinte, string copil)
+        public void add(T parinte, T copil, string part)
         {
 
 
             if (find(parinte) == null)
             {
-                root = new TreeNode();
+                root = new TreeNode<T>();
 
                 root.Left = null;
                 root.Right = null;
@@ -67,23 +68,27 @@ namespace ArboriDragAndDrop.Arbori
             else
             {
 
-                TreeNode nou = new TreeNode();
+                TreeNode<T> nou = new TreeNode<T>();
                 nou.Data = copil;
                 nou.Left = null;
                 nou.Right = null;
 
-                TreeNode aux = find(root, parinte);
+                TreeNode<T> aux = find(root, parinte);
 
-                if (aux.Left == null)
+                if (aux.Left == null && part == "left")
                 {
 
                     aux.Left = nou;
                     return;
                 }
-                else
+                else if(aux.Right == null && part == "right")
                 {
                     aux.Right = nou;
                     return;
+                }
+                else
+                {
+                    MessageBox.Show("Nu sa putu adauga!!","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
 
             }
@@ -94,25 +99,21 @@ namespace ArboriDragAndDrop.Arbori
 
         public void afisare()
         {
-            ICoada<TreeNode> coada = new Coada<TreeNode>();
+            ICoada<TreeNode<T>> coada = new Coada<TreeNode<T>>();
 
-            TreeNode Node = root;
-
-            Console.WriteLine(Node.Data);
-
-            Node = Node.Left;
+            TreeNode<T> Node = root;
 
             do
             {
-
-                Console.WriteLine(Node.Data);
+                
+                MessageBox.Show(Node.Data.ToString());
 
                 coada.push(Node.Left);
                 coada.push(Node.Right);
-                //Console.WriteLine(coada.top().Data) ;
+                //MessageBox.Show(coada.top().Data) ;
                 Node = coada.top();
 
-                //  Console.WriteLine(Node.Data);
+                //  MessageBox.Show(Node.Data);
 
                 coada.pop();
 
@@ -121,7 +122,17 @@ namespace ArboriDragAndDrop.Arbori
 
         }
 
+        public void setT(T luat, T pus)
+        {
 
+            TreeNode<T> card1 = find(root,luat);
+            TreeNode<T> card2 = find(root,pus);
+
+            T aux = card1.Data;
+            card1.Data = card2.Data;
+            card2.Data = aux;
+
+        }
 
     }
 }

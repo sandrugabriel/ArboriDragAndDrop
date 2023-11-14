@@ -40,6 +40,7 @@
             this.label1.Size = new System.Drawing.Size(181, 59);
             this.label1.TabIndex = 0;
             this.label1.Text = "ASDASDSADASDASDA";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MockupCard
             // 
