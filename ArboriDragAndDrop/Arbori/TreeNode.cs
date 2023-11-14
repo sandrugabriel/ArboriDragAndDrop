@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ArboriDragAndDrop.Arbori
 {
-    public class TreeNode : IComparable<TreeNode>
+    public class TreeNode<T> : IComparable<TreeNode<T>>
     {
 
-        public TreeNode Left { get; set; }
-        public TreeNode Right { get; set; }
-        public string Data { get; set; }
+        public TreeNode<T> Left { get; set; }
+        public TreeNode<T> Right { get; set; }
+        public T Data { get; set; }
 
-        public int CompareTo(TreeNode other)
+        public int CompareTo(TreeNode<T> other)
         {
             throw new NotImplementedException();
         }

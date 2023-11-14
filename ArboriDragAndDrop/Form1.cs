@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArboriDragAndDrop.View.Panels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,14 @@ namespace ArboriDragAndDrop
 {
     public partial class Form1 : Form
     {
+        public int ct = 0;
+
         public Form1()
         {
             InitializeComponent();
+
+            this.Controls.Add(new PnlCards(this));
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

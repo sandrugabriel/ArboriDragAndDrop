@@ -8,19 +8,20 @@ using System.Threading.Tasks;
 
 namespace ArboriDragAndDrop.Arbori.interfaces
 {
-    public interface IArbor
+    public interface IArbor<T>
     {
 
-        TreeNode getNode();
+        TreeNode<T> getNode();
 
-        string find(string cautat);
+        T find(T cautat);
 
-        TreeNode find(TreeNode current, String cautat);
+        TreeNode<T> find(TreeNode<T> current, T cautat);
 
-        void add(string parinte, string copil);
+        void add(T parinte, T copil,string part);
 
         void afisare();
 
+        void setT(T luat, T pus);
 
     }
 }
