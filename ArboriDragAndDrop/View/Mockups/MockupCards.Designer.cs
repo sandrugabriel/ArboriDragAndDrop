@@ -35,22 +35,11 @@
             this.card7 = new System.Windows.Forms.Panel();
             this.card2 = new System.Windows.Forms.Panel();
             this.card1 = new System.Windows.Forms.Panel();
-            this.pct1 = new System.Windows.Forms.PictureBox();
-            this.pct2 = new System.Windows.Forms.PictureBox();
-            this.pct3 = new System.Windows.Forms.PictureBox();
-            this.pct4 = new System.Windows.Forms.PictureBox();
-            this.pct5 = new System.Windows.Forms.PictureBox();
-            this.pct6 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pct1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct6)).BeginInit();
             this.SuspendLayout();
             // 
             // card4
             // 
+            this.card4.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.card4.Location = new System.Drawing.Point(231, 467);
             this.card4.Name = "card4";
             this.card4.Size = new System.Drawing.Size(184, 77);
@@ -58,6 +47,7 @@
             // 
             // card5
             // 
+            this.card5.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.card5.Location = new System.Drawing.Point(448, 467);
             this.card5.Name = "card5";
             this.card5.Size = new System.Drawing.Size(184, 77);
@@ -65,6 +55,7 @@
             // 
             // card6
             // 
+            this.card6.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.card6.Location = new System.Drawing.Point(747, 470);
             this.card6.Name = "card6";
             this.card6.Size = new System.Drawing.Size(184, 77);
@@ -72,13 +63,16 @@
             // 
             // card3
             // 
+            this.card3.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.card3.Location = new System.Drawing.Point(849, 361);
             this.card3.Name = "card3";
             this.card3.Size = new System.Drawing.Size(184, 77);
             this.card3.TabIndex = 4;
+            this.card3.DragDrop += new System.Windows.Forms.DragEventHandler(this.card3_DragDrop);
             // 
             // card7
             // 
+            this.card7.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.card7.Location = new System.Drawing.Point(966, 470);
             this.card7.Name = "card7";
             this.card7.Size = new System.Drawing.Size(184, 77);
@@ -86,6 +80,7 @@
             // 
             // card2
             // 
+            this.card2.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.card2.Location = new System.Drawing.Point(344, 361);
             this.card2.Name = "card2";
             this.card2.Size = new System.Drawing.Size(184, 77);
@@ -94,70 +89,12 @@
             // 
             // card1
             // 
+            this.card1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.card1.Location = new System.Drawing.Point(602, 245);
             this.card1.Name = "card1";
             this.card1.Size = new System.Drawing.Size(184, 77);
             this.card1.TabIndex = 7;
-            // 
-            // pct1
-            // 
-            this.pct1.Image = global::ArboriDragAndDrop.Properties.Resources.up_arrow1;
-            this.pct1.Location = new System.Drawing.Point(463, 264);
-            this.pct1.Name = "pct1";
-            this.pct1.Size = new System.Drawing.Size(199, 104);
-            this.pct1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pct1.TabIndex = 8;
-            this.pct1.TabStop = false;
-            // 
-            // pct2
-            // 
-            this.pct2.Image = global::ArboriDragAndDrop.Properties.Resources.up_arrow;
-            this.pct2.Location = new System.Drawing.Point(720, 264);
-            this.pct2.Name = "pct2";
-            this.pct2.Size = new System.Drawing.Size(199, 104);
-            this.pct2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pct2.TabIndex = 8;
-            this.pct2.TabStop = false;
-            // 
-            // pct3
-            // 
-            this.pct3.Image = global::ArboriDragAndDrop.Properties.Resources.up_arrow1;
-            this.pct3.Location = new System.Drawing.Point(324, 423);
-            this.pct3.Name = "pct3";
-            this.pct3.Size = new System.Drawing.Size(109, 53);
-            this.pct3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pct3.TabIndex = 8;
-            this.pct3.TabStop = false;
-            // 
-            // pct4
-            // 
-            this.pct4.Image = global::ArboriDragAndDrop.Properties.Resources.up_arrow;
-            this.pct4.Location = new System.Drawing.Point(458, 423);
-            this.pct4.Name = "pct4";
-            this.pct4.Size = new System.Drawing.Size(109, 53);
-            this.pct4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pct4.TabIndex = 8;
-            this.pct4.TabStop = false;
-            // 
-            // pct5
-            // 
-            this.pct5.Image = global::ArboriDragAndDrop.Properties.Resources.up_arrow1;
-            this.pct5.Location = new System.Drawing.Point(832, 423);
-            this.pct5.Name = "pct5";
-            this.pct5.Size = new System.Drawing.Size(109, 53);
-            this.pct5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pct5.TabIndex = 8;
-            this.pct5.TabStop = false;
-            // 
-            // pct6
-            // 
-            this.pct6.Image = global::ArboriDragAndDrop.Properties.Resources.up_arrow;
-            this.pct6.Location = new System.Drawing.Point(966, 423);
-            this.pct6.Name = "pct6";
-            this.pct6.Size = new System.Drawing.Size(109, 53);
-            this.pct6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pct6.TabIndex = 8;
-            this.pct6.TabStop = false;
+            this.card1.DragDrop += new System.Windows.Forms.DragEventHandler(this.card1_DragDrop);
             // 
             // MockupCards
             // 
@@ -171,23 +108,12 @@
             this.Controls.Add(this.card7);
             this.Controls.Add(this.card2);
             this.Controls.Add(this.card1);
-            this.Controls.Add(this.pct1);
-            this.Controls.Add(this.pct2);
-            this.Controls.Add(this.pct3);
-            this.Controls.Add(this.pct4);
-            this.Controls.Add(this.pct5);
-            this.Controls.Add(this.pct6);
             this.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MockupCards";
             this.Text = "MockupCards";
-            ((System.ComponentModel.ISupportInitialize)(this.pct1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pct6)).EndInit();
+            this.Load += new System.EventHandler(this.MockupCards_Load);
             this.ResumeLayout(false);
 
         }
@@ -201,11 +127,5 @@
         private System.Windows.Forms.Panel card7;
         private System.Windows.Forms.Panel card2;
         private System.Windows.Forms.Panel card1;
-        private System.Windows.Forms.PictureBox pct2;
-        private System.Windows.Forms.PictureBox pct1;
-        private System.Windows.Forms.PictureBox pct6;
-        private System.Windows.Forms.PictureBox pct5;
-        private System.Windows.Forms.PictureBox pct4;
-        private System.Windows.Forms.PictureBox pct3;
     }
 }

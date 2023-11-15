@@ -33,6 +33,8 @@ namespace ArboriDragAndDrop.View.Panels
 
         PnlCard card;
 
+        List<PnlCard> allCards;
+
         public PnlCards(Form1 form1) { 
         
             this.form = form1;
@@ -54,7 +56,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.card2 = new PnlCard(form,"IT Divison");
             this.card3 = new PnlCard(form,"Marketing Head");
             this.card4 = new PnlCard(form,"Security Head");
-            this.card5 = new PnlCard(form," Add Development");
+            this.card5 = new PnlCard(form,"Add Development");
             this.card6 = new PnlCard(form,"Logistics Head");
             this.card7 = new PnlCard(form,"Public Relations");
             this.pct1 = new System.Windows.Forms.PictureBox();
@@ -186,19 +188,38 @@ namespace ArboriDragAndDrop.View.Panels
 
         //    arbor.afisare();
 
-            this.card1.btnText.Click += new EventHandler(all_Click);
-            this.card2.btnText.Click += new EventHandler(all_Click);
-            this.card3.btnText.Click += new EventHandler(all_Click);
-            this.card4.btnText.Click += new EventHandler(all_Click);
-            this.card5.btnText.Click += new EventHandler(all_Click);
-            this.card6.btnText.Click += new EventHandler(all_Click);
-            this.card7.btnText.Click += new EventHandler(all_Click);
+            this.card1.btnText.DragDrop += all_DragDrop;
+            this.card2.btnText.DragDrop += all_DragDrop;
+            this.card3.btnText.DragDrop += all_DragDrop;
+            this.card4.btnText.DragDrop += all_DragDrop;
+            this.card5.btnText.DragDrop += all_DragDrop;
+            this.card6.btnText.DragDrop += all_DragDrop;
+            this.card7.btnText.DragDrop += all_DragDrop;
+
+            this.card1.btnText.DragEnter += all_DragEnter;
+            this.card2.btnText.DragEnter += all_DragEnter;
+            this.card3.btnText.DragEnter += all_DragEnter;
+            this.card4.btnText.DragEnter += all_DragEnter;
+            this.card5.btnText.DragEnter += all_DragEnter;
+            this.card6.btnText.DragEnter += all_DragEnter;
+            this.card7.btnText.DragEnter += all_DragEnter;
+
+            allCards = new List<PnlCard>();
+
+            allCards.Add(card1);
+            allCards.Add(card2);
+            allCards.Add(card3);
+            allCards.Add(card4);
+            allCards.Add(card5);
+            allCards.Add(card6);
+            allCards.Add(card7);
+
 
         }
 
         private PnlCard getPanelFromButton(Button button)
         {
-
+            if( button != null )
             if (button.Tag is PnlCard associatedPanel)
             {
                 return associatedPanel;
@@ -206,34 +227,123 @@ namespace ArboriDragAndDrop.View.Panels
 
             return null; 
         }
+        /*
+                private void all_Click(object sender, System.EventArgs e)
+                {
+                    if (sender is Button clickedButton)
+                    {
+                        form.ct++;
+                    //    MessageBox.Show(card.ToString());
 
-        private void all_Click(object sender, System.EventArgs e)
+                        if (form.ct == 2)
+                        {
+                            clickCards.Add(getPanelFromButton(clickedButton));
+                            arbor.setT(card, clickCards[0]);
+                            form.ct = 0;
+                            PnlCard pnlCard = card;
+                            string text1= clickCards[0].btnText.Text;
+                            string text2 = pnlCard.btnText.Text;
+                            card.btnText.Text = text1;
+                            clickCards[0].btnText.Text = text2;
+                            clickCards.Clear();
+                        }
+                        else
+                        {
+                            card = getPanelFromButton(clickedButton);
+                        }
+
+                    }
+                }*/
+
+
+        /*
+                public PnlCard findByText(string text)
+                {
+
+                    for(int i=0; i<allCards.Count; i++)
+                    {
+                        if (allCards[i].btnText.Text.Equals(text))
+                        {
+                            Button button = allCards[i].btnText;
+                            return getPanelFromButton(button);
+                        }
+                    }
+
+                    return null;
+                }*/
+        Button drag;
+        int ct = 0;
+        private void all_DragEnter(object sender, DragEventArgs e)
         {
-            if (sender is Button clickedButton)
+            e.Effect = DragDropEffects.Move;
+            if (sender is Button button && ct == 0)
             {
-                form.ct++;
-            //    MessageBox.Show(card.ToString());
-
-                if (form.ct == 2)
-                {
-                    clickCards.Add(getPanelFromButton(clickedButton));
-                    arbor.setT(card, clickCards[0]);
-                    form.ct = 0;
-                    PnlCard pnlCard = card;
-                    string text1= clickCards[0].btnText.Text;
-                    string text2 = pnlCard.btnText.Text;
-                    card.btnText.Text = text1;
-                    clickCards[0].btnText.Text = text2;
-                    clickCards.Clear();
-                }
-                else
-                {
-                    card = getPanelFromButton(clickedButton);
-                }
-
+                drag = button;
+                ct++;
             }
+            if (ct == 2) ct = 0;
+               
         }
 
+
+        public Button findByText(string text)
+        {
+
+            for (int i = 0; i < allCards.Count; i++)
+            {
+                if (allCards[i].btnText.Text.Equals(text))
+                {
+                    return allCards[i].btnText;
+                }
+            }
+
+            return null;
+        }
+
+        public void setPnl(string name,string text)
+        {
+
+
+            for (int i = 0; i < allCards.Count; i++)
+            {
+                if (allCards[i].Name.Equals(name))
+                {
+                    allCards[i].btnText.Text = text;
+                }
+            }
+
+        }
+
+        private void all_DragDrop(object sender, DragEventArgs e)
+        {
+
+            string text = sender.ToString().Remove(0, 35);
+            Button btnDestinatie = findByText(text);
+            PnlCard destinatie = getPanelFromButton(btnDestinatie);
+
+            Button btnsura = drag;
+            PnlCard sura = getPanelFromButton(btnsura);
+
+         //   arbor.setT(sura,destinatie);
+            /*
+                        string text2 = sura.btnText.Text;
+
+                        setPnl(sura.Name, text);
+                        setPnl(destinatie.Name, text2);
+
+
+                        sura.btnText.Text = text;
+                        destinatie.btnText.Text = text2;
+            */
+
+           // clickCards.Add(getPanelFromButton(btnsura));
+            arbor.setT(sura,destinatie);
+            string text1 = sura.btnText.Text;
+            string text2 = destinatie.btnText.Text;
+            destinatie.btnText.Text = text1;
+            sura.btnText.Text = text2;
+            ct = 0;
+        }
 
     }
 }

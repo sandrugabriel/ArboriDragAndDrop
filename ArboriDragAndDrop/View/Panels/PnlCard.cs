@@ -29,6 +29,8 @@ namespace ArboriDragAndDrop.View.Panels
             this.Size = new System.Drawing.Size(184, 77);
             this.Name = "PnlCard";
             this.BackColor = System.Drawing.Color.DimGray;
+            this.AllowDrop = true;
+            this.MouseDown += this_MouseDown;
 
             this.btnText = new System.Windows.Forms.Button();
             this.eliThis = new BunifuElipse();
@@ -49,8 +51,10 @@ namespace ArboriDragAndDrop.View.Panels
             this.btnText.FlatStyle = FlatStyle.Flat;
             this.btnText.FlatAppearance.BorderSize = 0;
             this.btnText.Dock = DockStyle.Fill;
+            this.btnText.AllowDrop = true;
             this.btnText.Tag = this;
 
+            this.btnText.MouseDown += this_MouseDown;
         }
 
         public override string ToString()
@@ -58,7 +62,14 @@ namespace ArboriDragAndDrop.View.Panels
             return btnText.Text;
         }
 
-    
+        private void this_MouseDown(object sender, MouseEventArgs e)
+        {
+            Button button = sender as Button;
 
+            this.DoDragDrop(button, DragDropEffects.Move);
+
+        }
+
+      
     }
 }
