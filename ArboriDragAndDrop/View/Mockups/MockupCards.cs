@@ -21,5 +21,20 @@ namespace ArboriDragAndDrop.View.Mockups
         {
 
         }
+
+        private void card1_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void card3_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void MockupCards_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
