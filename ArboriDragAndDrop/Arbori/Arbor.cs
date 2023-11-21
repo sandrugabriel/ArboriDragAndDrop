@@ -3,6 +3,7 @@ using ArboriDragAndDrop.Coada;
 using ArboriDragAndDrop.Coada.interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,6 +134,69 @@ namespace ArboriDragAndDrop.Arbori
             card2.Data = aux;
 
         }
+
+        public void saveFisier(TreeNode<T> node, string name)
+        {
+
+            ICoada<TreeNode<T>> coada = new Coada<TreeNode<T>>();
+
+            TreeNode<T> Node = node;
+
+            string text = "";
+
+
+
+            do
+            {
+                text += name + "|" + Node.Left.Data.Name.ToString() + "|" + Node.Data.Name.ToString() + "|" + Node.Right.Data.Name.ToString() + "\n"; 
+
+                coada.push(Node.Left);
+                coada.push(Node.Right);
+                Node = coada.top();
+
+
+                coada.pop();
+
+
+            } while (Node.Right != null && Node.Left != null);
+
+            File.AppendAllText(Application.StartupPath + @"/data/arbori.txt",text);
+
+            MessageBox.Show("Schema s-a salvat in fisier","Succes!",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+        }
+
+        public void load(string name)
+        {
+            root = new TreeNode<T>();
+
+            StreamReader streamReader = new StreamReader(Application.StartupPath + @"/data/arbori.txt");
+
+            string text = "";
+
+            while((text = streamReader.ReadLine()) != null && streamReader.ReadLine().Split('|')[0] == name)
+            {
+
+                string[] prop = text.Split('|');
+
+                TreeNode<T> left = new TreeNode<T>();
+
+                left.Data.Name = prop[0];
+                root.Left = left;
+
+                root.Data.Name = prop[1];
+
+                TreeNode<T> right = new TreeNode<T>();
+
+                right.Data.Name = prop[2];
+                root.Right = right;
+
+
+            }
+
+            streamReader.Close();
+        }
+
 
     }
 }

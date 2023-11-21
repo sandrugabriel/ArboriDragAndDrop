@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AlphaBlendTextBox">
+      <HintPath>..\..\..\..\..\Users\gabi2\Downloads\AlphaBlendTextBox_demo\AlphaBlendTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu_UI_v1.5.3">
       <HintPath>..\..\..\..\..\Users\gabi2\Downloads\Bunifu_UI_v1.5.3.dll</HintPath>
     </Reference>
@@ -77,10 +80,19 @@
     <Compile Include="View\Mockups\MockupCards.Designer.cs">
       <DependentUpon>MockupCards.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Mockups\MockupSlideBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Mockups\MockupSlideBar.Designer.cs">
+      <DependentUpon>MockupSlideBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Panels\PnlCard.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Panels\PnlCards.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Panels\PnlSlideBar.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
@@ -101,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Mockups\MockupCards.resx">
       <DependentUpon>MockupCards.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Mockups\MockupSlideBar.resx">
+      <DependentUpon>MockupSlideBar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

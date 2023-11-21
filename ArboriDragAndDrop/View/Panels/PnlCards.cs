@@ -1,11 +1,15 @@
 ﻿using ArboriDragAndDrop.Arbori;
 using ArboriDragAndDrop.Arbori.interfaces;
+using Bunifu.Framework.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using ZBobb;
 
 namespace ArboriDragAndDrop.View.Panels
 {
@@ -26,6 +30,18 @@ namespace ArboriDragAndDrop.View.Panels
         private System.Windows.Forms.PictureBox pct5;
         private System.Windows.Forms.PictureBox pct4;
         private System.Windows.Forms.PictureBox pct3;
+        private Button btnSave;
+        private BunifuElipse eliBtn;
+        private TextBox txtName;
+        private Label lblName;
+        private BunifuElipse eliLbl;
+
+        private PictureBox pctDesign;
+        private Label lblTile;
+        private Button btnPrimul;
+
+        private Panel pnlSlide;
+
 
         IArbor<Panel> arbor;
 
@@ -35,6 +51,8 @@ namespace ArboriDragAndDrop.View.Panels
 
         List<PnlCard> allCards;
 
+        Button btnUlt;
+
         public PnlCards(Form1 form1) { 
         
             this.form = form1;
@@ -42,6 +60,8 @@ namespace ArboriDragAndDrop.View.Panels
             arbor = new Arbor<Panel>();
 
             card = new PnlCard(form,"");
+
+            btnUlt = new Button();
 
             //PnlCards
             this.Size = new System.Drawing.Size(1409, 795);
@@ -65,8 +85,26 @@ namespace ArboriDragAndDrop.View.Panels
             this.pct4 = new System.Windows.Forms.PictureBox();
             this.pct5 = new System.Windows.Forms.PictureBox();
             this.pct6 = new System.Windows.Forms.PictureBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.eliBtn = new BunifuElipse();
+            this.lblName = new System.Windows.Forms.Label();
+            this.txtName = new TextBox();
+            this.eliLbl = new BunifuElipse();
+            this.pctDesign = new PictureBox();
+            this.lblTile = new Label();
+            this.btnPrimul = new System.Windows.Forms.Button();
+            this.pnlSlide = new Panel();
 
+            eliLbl.TargetControl = txtName;
+            eliLbl.ElipseRadius = 25;
 
+            eliBtn.TargetControl = btnSave;
+            eliBtn.ElipseRadius = 25;
+
+            this.Controls.Add(pnlSlide);
+            this.pnlSlide.Controls.Add(pctDesign);
+            this.pnlSlide.Controls.Add(lblTile);
+            this.pnlSlide.Controls.Add(btnPrimul);
             this.Controls.Add(this.card4);
             this.Controls.Add(this.card5);
             this.Controls.Add(this.card6);
@@ -80,46 +118,102 @@ namespace ArboriDragAndDrop.View.Panels
             this.Controls.Add(this.pct4);
             this.Controls.Add(this.pct5);
             this.Controls.Add(this.pct6);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.txtName);
+
+            //pnlSlide
+            this.pnlSlide.Location = new System.Drawing.Point(0,0);
+            this.pnlSlide.Size = new System.Drawing.Size(225, 795);
+            this.pnlSlide.BackColor = System.Drawing.SystemColors.AppWorkspace;
+
+            //pctDesign
+            this.pctDesign.Location = new System.Drawing.Point(28, 157);
+            this.pctDesign.Size = new System.Drawing.Size(197, 2);
+            this.pctDesign.BackColor = System.Drawing.Color.Black;
+
+            //lbblTile
+            this.lblTile.Location = new System.Drawing.Point(37, 119);
+            this.lblTile.AutoSize = true;
+            this.lblTile.Font = new System.Drawing.Font("Century Gothic", 20);
+            this.lblTile.Text = "Scheme";
+
+            //btnPrimul
+            this.btnPrimul.Location = new System.Drawing.Point(0, 206);
+            this.btnPrimul.Size = new System.Drawing.Size(225, 77);
+            this.btnPrimul.FlatAppearance.BorderSize = 0;
+            this.btnPrimul.FlatStyle = FlatStyle.Flat;
+            this.btnPrimul.Text = "schema principala";
+            this.btnPrimul.Font = new System.Drawing.Font("Century Gothic", 14);
+            this.btnPrimul.AutoEllipsis = true;
+            this.btnPrimul.Cursor = Cursors.Hand;
+            this.btnPrimul.Click += new EventHandler(btnPrim_Click);
+
+            //lblName
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(631, 25);
+            this.lblName.Text = "Name";
+            this.lblName.Font = new System.Drawing.Font("Century Gothic", 23);
+
+            //txtName
+            this.txtName.Location = new System.Drawing.Point(371, 77);
+            this.txtName.Size = new System.Drawing.Size(673, 64);
+            this.txtName.Font = new System.Drawing.Font("Century Gothic", 19);
+            this.txtName.TextAlign = HorizontalAlignment.Center;
+            this.txtName.Multiline = true;
+            this.txtName.BackColor = System.Drawing.Color.DimGray;
+            this.txtName.BorderStyle = BorderStyle.None;
+            this.txtName.ForeColor = System.Drawing.Color.Black;
+
+            //btnSave
+            this.btnSave.Location = new System.Drawing.Point(580, 657);
+            this.btnSave.Text = "Save";
+            this.btnSave.Size = new System.Drawing.Size(230, 87);
+            this.btnSave.BackColor = System.Drawing.Color.DimGray;
+            this.btnSave.FlatAppearance.BorderSize = 0;
+            this.btnSave.FlatStyle = FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Century Gothic", 16);
+            this.btnSave.Click += new EventHandler(btnSave_Click);
 
             // card4
             this.card4.Location = new System.Drawing.Point(245, 468);
-            this.card4.Name = "card4";
+            this.card4.Name = "Security Head";
             this.card4.Size = new System.Drawing.Size(184, 77);
             this.card4.TabIndex = 1;
              
             // card5
             this.card5.Location = new System.Drawing.Point(462, 468);
-            this.card5.Name = "card5";
+            this.card5.Name = "Add Development";
             this.card5.Size = new System.Drawing.Size(184, 77);
             this.card5.TabIndex = 2;
              
             // card6
             this.card6.Location = new System.Drawing.Point(761, 471);
-            this.card6.Name = "card6";
+            this.card6.Name = "Logistics Head";
             this.card6.Size = new System.Drawing.Size(184, 77);
             this.card6.TabIndex = 3;
              
             // card3
             this.card3.Location = new System.Drawing.Point(863, 362);
-            this.card3.Name = "card3";
+            this.card3.Name = "Marketing Head";
             this.card3.Size = new System.Drawing.Size(184, 77);
             this.card3.TabIndex = 4;
              
             // card7
             this.card7.Location = new System.Drawing.Point(980, 471);
-            this.card7.Name = "card7";
+            this.card7.Name = "Public Relations";
             this.card7.Size = new System.Drawing.Size(184, 77);
             this.card7.TabIndex = 5;
              
             // card2
             this.card2.Location = new System.Drawing.Point(358, 362);
-            this.card2.Name = "card2";
+            this.card2.Name = "IT Divison";
             this.card2.Size = new System.Drawing.Size(184, 77);
             this.card2.TabIndex = 6;
              
             // card1
             this.card1.Location = new System.Drawing.Point(616, 246);
-            this.card1.Name = "card1";
+            this.card1.Name = "Depunty Director";
             this.card1.Size = new System.Drawing.Size(184, 77);
             this.card1.TabIndex = 7;
             
@@ -214,8 +308,188 @@ namespace ArboriDragAndDrop.View.Panels
             allCards.Add(card6);
             allCards.Add(card7);
 
+            //MessageBox.Show(arbor.getNode().Data.Name);
+
+            btnUlt = btnPrimul;
+
+            pnlSlide.AutoScroll = true;
+
+            loadBar();
 
         }
+
+        public void loadBar()
+        {
+
+            StreamReader streamReader = new StreamReader(Application.StartupPath + @"/data/arbori.txt");
+
+            string text = "";
+            int ct = 0;
+
+            while((text = streamReader.ReadLine()) != null)
+            {
+                string[] prop = text.Split('|');
+                if (ct == 3 && !prop[0].Equals("schema principala"))
+                {
+                    Button btn = new Button();
+
+                    btn.Location = new System.Drawing.Point(0, btnUlt.Location.Y + 85);
+                    btn.Size = new System.Drawing.Size(225, 77);
+                    btn.FlatAppearance.BorderSize = 0;
+                    btn.FlatStyle = FlatStyle.Flat;
+                    btn.Text = prop[0];
+                    btn.Font = new System.Drawing.Font("Century Gothic", 14);
+                    btn.AutoEllipsis = true;
+                    btn.Cursor = Cursors.Hand;
+                    btn.Click += new EventHandler(btnPrim_Click);
+
+                    this.pnlSlide.Controls.Add(btn);
+
+                    btnUlt = btn;
+                    ct = 0;
+                }
+
+                ct++;
+               // MessageBox.Show(text);
+            }
+
+            streamReader.Close();
+
+        }
+
+        public PnlCard findByName(string name)
+        {
+                foreach (Control control in Controls)
+                {
+                    if (control is PnlCard panel && panel.Name == name)
+                    {
+                        return panel;
+                    }
+                }
+
+            return null;
+        }
+
+        private void btnPrim_Click(object sender, EventArgs e)
+        {
+
+
+            if(sender is Button button)
+            {
+
+
+                string nameBtn = button.Text;
+
+                if (nameBtn == "schema principala")
+                {
+                    this.form.removePnl("PnlCards");
+                    this.form.Controls.Add(new PnlCards(form));
+                }
+
+                StreamReader reader = new StreamReader(Application.StartupPath +@"/data/arbori.txt");
+                string text = "";
+                int ct = 0;
+
+                while ((text = reader.ReadLine()) != null)
+                {
+
+                    string[] prop = text.Split('|');
+                    if (prop[0] == nameBtn)
+                    {
+                        if (ct == 0)
+                        {
+
+
+                            PnlCard sursa1 = findByName(prop[1]);
+
+                            arbor.setT(sursa1, card2);
+                            string text1 = sursa1.Name;
+                            card2.btnText.Text = text1;
+                            card2.Name = sursa1.Name;
+
+                            PnlCard sursa = findByName(prop[2]);
+
+                            arbor.setT(sursa, card1);
+                            string text11 = sursa.Name;
+                            card1.btnText.Text = text11;
+                            card1.Name = sursa.Name;
+
+                            PnlCard sursa2 = findByName(prop[3]);
+
+                            arbor.setT(sursa2, card3);
+                            string text_1 = sursa2.Name;
+                            string text_2 = card3.Name;
+                            card3.btnText.Text = text_1;
+                            sursa2.btnText.Text = text_2;
+                            card3.Name = sursa2.Name;
+                        }
+
+                        if (ct == 1)
+                        {
+/*
+                            PnlCard sursa = findByName(prop[1]);
+
+                            arbor.setT(sursa, card4);*/
+                            string text1 = prop[1];
+                            card4.btnText.Text = text1;
+                            card4.Name = prop[1];
+
+
+/*
+                            PnlCard sursa1 = findByName(prop[3]);
+
+                            arbor.setT(sursa1, card5);*/
+                            string text_1 = prop[3];
+                            card5.btnText.Text = text_1;
+                            card5.Name = prop[3];
+
+                        }
+
+                        if (ct == 2)
+                        {
+
+                            string text1 = prop[1];
+                            card6.btnText.Text = text1;
+                            card6.Name = prop[1];
+
+
+                            string text_1 = prop[3];
+                            card7.btnText.Text = text_1;
+                            card7.Name = prop[3];
+
+                        }
+
+                        ct++;
+                    }
+                   
+                }
+
+
+                reader.Close();
+            }
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (!txtName.Text.Equals(""))
+            {
+                arbor.saveFisier(arbor.getNode(), txtName.Text);
+
+                btnUlt = btnPrimul;
+
+                this.pnlSlide.Controls.Clear();
+
+                this.pnlSlide.Controls.Add(pctDesign);
+                this.pnlSlide.Controls.Add(lblTile);
+                this.pnlSlide.Controls.Add(btnPrimul);
+
+                loadBar();
+            }
+                
+            else MessageBox.Show("Introduceti numele schemei!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
 
         private PnlCard getPanelFromButton(Button button)
         {
@@ -227,52 +501,10 @@ namespace ArboriDragAndDrop.View.Panels
 
             return null; 
         }
-        /*
-                private void all_Click(object sender, System.EventArgs e)
-                {
-                    if (sender is Button clickedButton)
-                    {
-                        form.ct++;
-                    //    MessageBox.Show(card.ToString());
 
-                        if (form.ct == 2)
-                        {
-                            clickCards.Add(getPanelFromButton(clickedButton));
-                            arbor.setT(card, clickCards[0]);
-                            form.ct = 0;
-                            PnlCard pnlCard = card;
-                            string text1= clickCards[0].btnText.Text;
-                            string text2 = pnlCard.btnText.Text;
-                            card.btnText.Text = text1;
-                            clickCards[0].btnText.Text = text2;
-                            clickCards.Clear();
-                        }
-                        else
-                        {
-                            card = getPanelFromButton(clickedButton);
-                        }
-
-                    }
-                }*/
-
-
-        /*
-                public PnlCard findByText(string text)
-                {
-
-                    for(int i=0; i<allCards.Count; i++)
-                    {
-                        if (allCards[i].btnText.Text.Equals(text))
-                        {
-                            Button button = allCards[i].btnText;
-                            return getPanelFromButton(button);
-                        }
-                    }
-
-                    return null;
-                }*/
         Button drag;
         int ct = 0;
+
         private void all_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
@@ -284,7 +516,6 @@ namespace ArboriDragAndDrop.View.Panels
             if (ct == 2) ct = 0;
                
         }
-
 
         public Button findByText(string text)
         {
@@ -324,26 +555,18 @@ namespace ArboriDragAndDrop.View.Panels
             Button btnsura = drag;
             PnlCard sura = getPanelFromButton(btnsura);
 
-         //   arbor.setT(sura,destinatie);
-            /*
-                        string text2 = sura.btnText.Text;
-
-                        setPnl(sura.Name, text);
-                        setPnl(destinatie.Name, text2);
-
-
-                        sura.btnText.Text = text;
-                        destinatie.btnText.Text = text2;
-            */
-
-           // clickCards.Add(getPanelFromButton(btnsura));
             arbor.setT(sura,destinatie);
             string text1 = sura.btnText.Text;
             string text2 = destinatie.btnText.Text;
             destinatie.btnText.Text = text1;
             sura.btnText.Text = text2;
             ct = 0;
+         //   arbor.afisare();
         }
+
+
+
+
 
     }
 }

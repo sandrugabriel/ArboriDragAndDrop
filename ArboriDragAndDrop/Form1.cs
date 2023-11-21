@@ -23,6 +23,26 @@ namespace ArboriDragAndDrop
 
         }
 
+        public void removePnl(string pnl)
+        {
+
+            Control control = null;
+
+            foreach (Control c in this.Controls)
+            {
+
+                if (c.Name.Equals(pnl))
+                {
+                    control = c;
+                }
+
+            }
+
+            this.Controls.Remove(control);
+
+        }
+
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Close();
