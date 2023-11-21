@@ -23,5 +23,8 @@ namespace ArboriDragAndDrop.Arbori.interfaces
 
         void setT(T luat, T pus);
 
+        void saveFisier(TreeNode<T> node, string name);
+
+        void load(string name);
     }
 }
