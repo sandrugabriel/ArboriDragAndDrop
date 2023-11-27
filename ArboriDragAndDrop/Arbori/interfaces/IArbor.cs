@@ -26,5 +26,9 @@ namespace ArboriDragAndDrop.Arbori.interfaces
         void saveFisier(TreeNode<T> node, string name);
 
         void load(string name);
+
+        T findParinte(T data);
+
+        void afisareParinte(T data);
     }
 }

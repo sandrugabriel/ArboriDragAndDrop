@@ -35,6 +35,7 @@ namespace ArboriDragAndDrop.View.Panels
         private TextBox txtName;
         private Label lblName;
         private BunifuElipse eliLbl;
+        private Button btnAdd;
 
         private PictureBox pctDesign;
         private Label lblTile;
@@ -94,6 +95,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.lblTile = new Label();
             this.btnPrimul = new System.Windows.Forms.Button();
             this.pnlSlide = new Panel();
+            this.btnAdd = new Button();
 
             eliLbl.TargetControl = txtName;
             eliLbl.ElipseRadius = 25;
@@ -121,6 +123,18 @@ namespace ArboriDragAndDrop.View.Panels
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
+            this.pnlSlide.Controls.Add(this.btnAdd);
+
+            //btnAdd
+            this.btnAdd.Location = new System.Drawing.Point(0, 206);
+            this.btnAdd.Size = new System.Drawing.Size(225, 77);
+            this.btnAdd.Text = "Add Schema";
+            this.btnAdd.FlatAppearance.BorderSize = 0;
+            this.btnAdd.FlatStyle = FlatStyle.Flat;
+            this.btnAdd.Cursor = Cursors.Hand;
+            this.btnAdd.AutoEllipsis = true;
+            this.btnAdd.Font = new System.Drawing.Font("Century Gothic", 14);
+            this.btnAdd.Click += new EventHandler(btnAdd_Click);
 
             //pnlSlide
             this.pnlSlide.Location = new System.Drawing.Point(0,0);
@@ -139,7 +153,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.lblTile.Text = "Scheme";
 
             //btnPrimul
-            this.btnPrimul.Location = new System.Drawing.Point(0, 206);
+            this.btnPrimul.Location = new System.Drawing.Point(0, this.btnAdd.Location.Y + 85);
             this.btnPrimul.Size = new System.Drawing.Size(225, 77);
             this.btnPrimul.FlatAppearance.BorderSize = 0;
             this.btnPrimul.FlatStyle = FlatStyle.Flat;
@@ -164,6 +178,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.txtName.BackColor = System.Drawing.Color.DimGray;
             this.txtName.BorderStyle = BorderStyle.None;
             this.txtName.ForeColor = System.Drawing.Color.Black;
+            this.txtName.Visible = false;
 
             //btnSave
             this.btnSave.Location = new System.Drawing.Point(580, 657);
@@ -315,6 +330,13 @@ namespace ArboriDragAndDrop.View.Panels
             pnlSlide.AutoScroll = true;
 
             loadBar();
+
+        }
+
+        public void btnAdd_Click(object sender, EventArgs e)
+        {
+
+
 
         }
 
@@ -482,6 +504,7 @@ namespace ArboriDragAndDrop.View.Panels
 
                 this.pnlSlide.Controls.Add(pctDesign);
                 this.pnlSlide.Controls.Add(lblTile);
+                this.pnlSlide.Controls.Add(btnAdd);
                 this.pnlSlide.Controls.Add(btnPrimul);
 
                 loadBar();
@@ -489,7 +512,6 @@ namespace ArboriDragAndDrop.View.Panels
                 
             else MessageBox.Show("Introduceti numele schemei!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
 
         private PnlCard getPanelFromButton(Button button)
         {

@@ -19,7 +19,7 @@ namespace ArboriDragAndDrop
         {
             InitializeComponent();
 
-            this.Controls.Add(new PnlCards(this));
+            this.Controls.Add(new PnlDinamicCards(this));
 
         }
 
