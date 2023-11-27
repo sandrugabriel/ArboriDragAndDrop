@@ -197,6 +197,53 @@ namespace ArboriDragAndDrop.Arbori
             streamReader.Close();
         }
 
+        public T findParinte(T copil)
+        {
 
+            ICoada<TreeNode<T>> coada = new Coada<TreeNode<T>>();
+
+            TreeNode<T> Node = root;
+
+            do
+            {
+                if (Node.Left != null )
+                    if(Node.Left.Data == copil)
+                    {
+                        return Node.Data;
+                    }
+
+                if (Node.Right != null)
+                    if (Node.Right.Data == copil)
+                    {
+                        return Node.Data;
+                    }
+               
+                   // MessageBox.Show(Node.Data.ToString());
+
+                coada.push(Node.Left);
+                coada.push(Node.Right);
+                Node = coada.top();
+
+                coada.pop();
+
+
+            } while (Node != null);
+
+
+            return null;
+        }
+
+        public void afisareParinte(T data)
+        {
+            string t = "Parintele: " + data.ToString();
+            TreeNode<T> aux = find(root, data);
+            if (aux.Left != null)
+                t += "\nLeft: " + aux.Left.Data.ToString();
+
+            if (aux.Right != null)
+                t += "   Right: " + aux.Right.Data.ToString();
+
+            MessageBox.Show(t);
+        }
     }
 }

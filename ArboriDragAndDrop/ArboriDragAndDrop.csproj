@@ -92,6 +92,9 @@
     <Compile Include="View\Panels\PnlCards.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\Panels\PnlDinamicCards.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="View\Panels\PnlSlideBar.cs">
       <SubType>Component</SubType>
     </Compile>

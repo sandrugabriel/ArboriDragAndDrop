@@ -18,7 +18,8 @@ namespace ArboriDragAndDrop.View.Panels
 
         public System.Windows.Forms.Button btnText;
         BunifuElipse eliThis;
-
+        public TextBox txtText;
+        BunifuElipse eliTxt;
 
         public PnlCard(Form1 form1,string data1) {
 
@@ -34,11 +35,25 @@ namespace ArboriDragAndDrop.View.Panels
 
             this.btnText = new System.Windows.Forms.Button();
             this.eliThis = new BunifuElipse();
+            this.txtText = new TextBox();
+            this.eliTxt = new BunifuElipse();
+
+            eliTxt.TargetControl = txtText;
+            eliTxt.ElipseRadius = 25;
 
             eliThis.TargetControl = this;
             eliThis.ElipseRadius = 25;
 
+            this.Controls.Add(this.txtText);
             this.Controls.Add(this.btnText);
+
+            //txtText
+            this.txtText.Location = new System.Drawing.Point(2, 9);
+            this.txtText.Size = new System.Drawing.Size(181, 59);
+            this.txtText.BorderStyle = BorderStyle.None;
+            this.txtText.Font = new System.Drawing.Font("Century Gothic", 12);
+            this.txtText.Multiline = true;
+           // this.txtText.BackColor = System.Drawing.Color.Gray;
 
             // btnText
             this.btnText.AutoEllipsis = true;
