@@ -76,7 +76,7 @@ namespace ArboriDragAndDrop.View.Panels
 
             list = list.Distinct().ToList();
 
-
+            .
             int x = 59, y = 200, ct = 0;
 
             foreach (string items in list)
