@@ -1,4 +1,5 @@
-﻿using ArboriDragAndDrop.View.Panels;
+﻿using ArboriDragAndDrop.Users.Models;
+using ArboriDragAndDrop.View.Panels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,13 +14,14 @@ namespace ArboriDragAndDrop
 {
     public partial class Form1 : Form
     {
-        public int ct = 0;
 
         public Form1()
         {
             InitializeComponent();
+            User user = new User("1|gabi|gabi@email.com|gabi1234");
 
-            this.Controls.Add(new PnlDinamicCards(this));
+            this.Controls.Add(new PnlSlideTileBar(this,user));
+            this.Controls.Add(new PnlHome(this,user));
 
         }
 
@@ -42,10 +44,20 @@ namespace ArboriDragAndDrop
 
         }
 
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.close.Location = new System.Drawing.Point(this.Size.Width - 73, 0);
+            this.mini.Location = new System.Drawing.Point(this.close.Location.X - 73, 0);
+        }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void close_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void mini_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
