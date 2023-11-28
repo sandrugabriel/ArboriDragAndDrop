@@ -69,6 +69,7 @@
             // card6
             // 
             this.card6.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.card6.BackgroundImage = global::ArboriDragAndDrop.Properties.Resources.menu__3_;
             this.card6.Location = new System.Drawing.Point(870, 572);
             this.card6.Name = "card6";
             this.card6.Size = new System.Drawing.Size(184, 77);
