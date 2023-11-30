@@ -816,6 +816,9 @@ namespace ArboriDragAndDrop.View.Panels
 
                     users.Add(user);
 
+                    this.form.removePnl("PnlLogin");
+                    this.form.Controls.Add(new PnlSlideTileBar(form, user));
+                    this.form.Controls.Add(new PnlHome(form, user));
                     serviceUsers.saveFisier(t);
 
 

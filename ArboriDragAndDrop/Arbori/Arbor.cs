@@ -135,7 +135,7 @@ namespace ArboriDragAndDrop.Arbori
 
         }
 
-        public void saveFisier(TreeNode<T> node, string name)
+        public void saveFisier(TreeNode<T> node, string name, string userId)
         {
 
             ICoada<TreeNode<T>> coada = new Coada<TreeNode<T>>();
@@ -148,7 +148,7 @@ namespace ArboriDragAndDrop.Arbori
 
             do
             {
-                text += name + "|" + Node.Left.Data.Name.ToString() + "|" + Node.Data.Name.ToString() + "|" + Node.Right.Data.Name.ToString() + "\n"; 
+                text += name + "|" + Node.Left.Data.Name.ToString() + "|" + Node.Data.Name.ToString() + "|" + Node.Right.Data.Name.ToString() + "|" + userId + "\n"; 
 
                 coada.push(Node.Left);
                 coada.push(Node.Right);
@@ -163,6 +163,37 @@ namespace ArboriDragAndDrop.Arbori
             File.AppendAllText(Application.StartupPath + @"/data/arbori.txt",text);
 
             MessageBox.Show("Schema s-a salvat in fisier","Succes!",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+        }
+
+        public string update(TreeNode<T> node, string name, string userId)
+        {
+
+            ICoada<TreeNode<T>> coada = new Coada<TreeNode<T>>();
+
+            TreeNode<T> Node = node;
+
+            string text = "";
+
+
+
+            do
+            {
+                text += name + "|" + Node.Left.Data.Name.ToString() + "|" + Node.Data.Name.ToString() + "|" + Node.Right.Data.Name.ToString() + "|" + userId + "\n";
+
+                coada.push(Node.Left);
+                coada.push(Node.Right);
+                Node = coada.top();
+
+
+                coada.pop();
+
+
+            } while (Node.Right != null && Node.Left != null);
+
+            return text;
+
+            MessageBox.Show("Schema s-a salvat in fisier", "Succes!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
 

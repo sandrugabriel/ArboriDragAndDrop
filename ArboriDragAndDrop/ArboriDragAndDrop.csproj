@@ -272,10 +272,16 @@
     <Compile Include="View\Panels\PnlCards.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\Panels\PnlDinamicCards.cs">
+    <Compile Include="View\Panels\PnlAdd.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Panels\PnlDelete.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Panels\PnlHome.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Panels\PnlLoad.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Panels\PnlLogin.cs">

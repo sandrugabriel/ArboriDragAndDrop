@@ -496,7 +496,7 @@ namespace ArboriDragAndDrop.View.Panels
         {
             if (!txtName.Text.Equals(""))
             {
-                arbor.saveFisier(arbor.getNode(), txtName.Text);
+             //   arbor.saveFisier(arbor.getNode(), txtName.Text, );
 
                 btnUlt = btnPrimul;
 
@@ -548,7 +548,7 @@ namespace ArboriDragAndDrop.View.Panels
                 {
                     return allCards[i].btnText;
                 }
-            }
+            } 
 
             return null;
         }
