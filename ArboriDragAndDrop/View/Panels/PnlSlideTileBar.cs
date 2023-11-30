@@ -26,8 +26,6 @@ namespace ArboriDragAndDrop.View.Panels
         private System.Windows.Forms.Label lblSignOut;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.PictureBox pctDelete;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.PictureBox pctEdit;
         private System.Windows.Forms.PictureBox pctMenu;
 
         Form1 form;
@@ -53,7 +51,6 @@ namespace ArboriDragAndDrop.View.Panels
 
             this.pctAdd = new System.Windows.Forms.PictureBox();
             this.pctDelete = new System.Windows.Forms.PictureBox();
-            this.pctEdit = new System.Windows.Forms.PictureBox();
             this.pctHome = new System.Windows.Forms.PictureBox();
             this.pctExit = new System.Windows.Forms.PictureBox();
             this.pctDesign = new System.Windows.Forms.PictureBox();
@@ -62,7 +59,6 @@ namespace ArboriDragAndDrop.View.Panels
             this.lblMenu = new System.Windows.Forms.Label();
             this.lblSignOut = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
             this.pctMenu = new System.Windows.Forms.PictureBox();
             this.timer = new Timer();
 
@@ -71,16 +67,13 @@ namespace ArboriDragAndDrop.View.Panels
 
             this.btnAdd.Controls.Add(this.pctAdd);
             this.btnDelete.Controls.Add(this.pctDelete);
-            this.btnEdit.Controls.Add(this.pctEdit);
             this.btnHome.Controls.Add(this.pctHome);
             this.Controls.Add(this.pctExit);
-           // this.Controls.Add(this.pctDesign);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblMenu);
             this.Controls.Add(this.lblSignOut);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.pctMenu);
 
             // pctAdd
@@ -101,16 +94,6 @@ namespace ArboriDragAndDrop.View.Panels
             this.pctDelete.Size = new System.Drawing.Size(54, 54);
             this.pctDelete.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pctDelete.Click += new EventHandler(btnDelete_Click);
-
-            // 
-            // pctEdit
-            this.pctEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pctEdit.Image = Image.FromFile(Application.StartupPath + @"/images/edit.png");
-            this.pctEdit.Location = new System.Drawing.Point(24, 2);
-            this.pctEdit.Name = "pctEdit";
-            this.pctEdit.Size = new System.Drawing.Size(54, 54);
-            this.pctEdit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pctEdit.Click += new EventHandler(btnEdit_Click);
 
             // 
             // pctHome
@@ -163,7 +146,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.btnAdd.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular);
             this.btnAdd.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAdd.Location = new System.Drawing.Point(0, 464);
+            this.btnAdd.Location = new System.Drawing.Point(0, 227 + 79 + 79);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(600, 60);
             this.btnAdd.TabIndex = 2;
@@ -201,29 +184,13 @@ namespace ArboriDragAndDrop.View.Panels
             this.btnDelete.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular);
             this.btnDelete.ForeColor = System.Drawing.SystemColors.Control;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDelete.Location = new System.Drawing.Point(0, 385);
+            this.btnDelete.Location = new System.Drawing.Point(0, 227 + 79);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(600, 60);
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "              Delete";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDelete.Click += new EventHandler(btnDelete_Click);
-             
-            // btnEdit
-            this.btnEdit.BackColor = System.Drawing.Color.Transparent;
-            this.btnEdit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEdit.FlatAppearance.BorderSize = 0;
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular);
-            this.btnEdit.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.Location = new System.Drawing.Point(0, 306);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(600, 60);
-            this.btnEdit.TabIndex = 2;
-            this.btnEdit.Text = "              Edit";
-            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Click += new EventHandler(btnEdit_Click);
              
             // pctMenu
             this.pctMenu.BackColor = System.Drawing.Color.Transparent;
@@ -269,16 +236,11 @@ namespace ArboriDragAndDrop.View.Panels
         private void pctExit_Click(object sender, EventArgs e)
         {
 
-            this.form.removePnl("PnlResult");
+            this.form.removePnl("PnlHome");
             this.form.removePnl("PnlLogin");
             this.form.removePnl("PnlSignUp");
             this.form.removePnl("PnlSlideTileBar");
-            this.form.removePnl("PnlTest");
-            this.form.removePnl("PnlEx");
-            this.form.removePnl("PnlDetali");
-            this.form.removePnl("PnlResurse");
-            this.form.removePnl("PnlVideo");
-            this.form.removePnl("PnlStartTest");
+            this.form.removePnl("PnlAdd");
             this.form.Controls.Add(new PnlLogin(form));
 
         }
@@ -291,93 +253,41 @@ namespace ArboriDragAndDrop.View.Panels
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-
-            this.form.removePnl("PnlResult");
-            this.form.removePnl("PnlLogin");
-            this.form.removePnl("PnlSignUp");
+            this.form.removePnl("PnlHome");
             this.form.removePnl("PnlSlideTileBar");
-            this.form.removePnl("PnlTest");
-            this.form.removePnl("PnlEx");
-            this.form.removePnl("PnlDetali");
-            this.form.removePnl("PnlResurse");
-            this.form.removePnl("PnlVideo");
-            this.form.removePnl("PnlStartTest");
+            this.form.removePnl("PnlAdd");
+            this.form.removePnl("PnlLoad");
+            this.form.removePnl("PnlDelete");
             this.form.Controls.Add(new PnlSlideTileBar(form, user));
-         //   this.form.Controls.Add(new PnlDescriere(form, user));
+            this.form.Controls.Add(new PnlHome(form, user));
 
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            this.form.removePnl("PnlResult");
-            this.form.removePnl("PnlLogin");
-            this.form.removePnl("PnlSignUp");
+
+            this.form.removePnl("PnlHome");
             this.form.removePnl("PnlSlideTileBar");
-            this.form.removePnl("PnlTest");
-            this.form.removePnl("PnlEx");
-            this.form.removePnl("PnlDetali");
-            this.form.removePnl("PnlResurse");
-            this.form.removePnl("PnlVideo");
-            this.form.removePnl("PnlStartTest");
+            this.form.removePnl("PnlAdd");
+            this.form.removePnl("PnlLoad");
+            this.form.removePnl("PnlDelete");
             this.form.Controls.Add(new PnlSlideTileBar(form, user));
-           // this.form.Controls.Add(new PnlStartTest(form,user));
+            this.form.Controls.Add(new PnlAdd(form,user));
 
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
 
-            this.form.removePnl("PnlResult");
-            this.form.removePnl("PnlLogin");
-            this.form.removePnl("PnlSignUp");
+            this.form.removePnl("PnlHome");
             this.form.removePnl("PnlSlideTileBar");
-            this.form.removePnl("PnlTest");
-            this.form.removePnl("PnlEx");
-            this.form.removePnl("PnlDetali");
-            this.form.removePnl("PnlResurse");
-            this.form.removePnl("PnlVideo");
-            this.form.removePnl("PnlStartTest");
-            this.form.Controls.Add(new PnlSlideTileBar(form,user));
-        //    this.form.Controls.Add(new PnlResurse(form,user));
-
-        }
-
-        private void btnEdit_Click(Object sender, EventArgs e)
-        {
-
-            this.form.removePnl("PnlResult");
-            this.form.removePnl("PnlLogin");
-            this.form.removePnl("PnlSignUp");
-            this.form.removePnl("PnlSlideTileBar");
-            this.form.removePnl("PnlTest");
-            this.form.removePnl("PnlEx");
-            this.form.removePnl("PnlDetali");
-            this.form.removePnl("PnlResurse");
-            this.form.removePnl("PnlVideo");
-            this.form.removePnl("PnlStartTest");
+            this.form.removePnl("PnlAdd");
+            this.form.removePnl("PnlLoad");
+            this.form.removePnl("PnlDelete");
             this.form.Controls.Add(new PnlSlideTileBar(form, user));
-        //    this.form.Controls.Add(new PnlExerciti(form, user));
+            this.form.Controls.Add(new PnlDelete(form, user));
 
         }
-
-        private void btnVideo_Click(object sender, EventArgs e)
-        {
-
-            this.form.removePnl("PnlResult");
-            this.form.removePnl("PnlLogin");
-            this.form.removePnl("PnlSignUp");
-            this.form.removePnl("PnlSlideTileBar");
-            this.form.removePnl("PnlTest");
-            this.form.removePnl("PnlEx");
-            this.form.removePnl("PnlDetali");
-            this.form.removePnl("PnlResurse");
-            this.form.removePnl("PnlVideo");
-            this.form.removePnl("PnlStartTest");
-            this.form.Controls.Add(new PnlSlideTileBar(form, user));
-         //   this.form.Controls.Add(new PnlVideo(form, user));
-
-        }
-
 
     }
 }

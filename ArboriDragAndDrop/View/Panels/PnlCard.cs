@@ -28,9 +28,10 @@ namespace ArboriDragAndDrop.View.Panels
 
             //PnlCard
             this.Size = new System.Drawing.Size(184, 77);
-            this.Name = "PnlCard";
-            this.BackColor = System.Drawing.Color.DimGray;
+            this.Name = data;
+            this.BackColor = System.Drawing.Color.FromArgb(15, 20, 35);
             this.AllowDrop = true;
+            this.ForeColor = System.Drawing.Color.White;
             this.MouseDown += this_MouseDown;
 
             this.btnText = new System.Windows.Forms.Button();
@@ -53,7 +54,12 @@ namespace ArboriDragAndDrop.View.Panels
             this.txtText.BorderStyle = BorderStyle.None;
             this.txtText.Font = new System.Drawing.Font("Century Gothic", 12);
             this.txtText.Multiline = true;
-           // this.txtText.BackColor = System.Drawing.Color.Gray;
+            this.txtText.ForeColor = System.Drawing.Color.White;
+            this.txtText.BackColor = System.Drawing.Color.FromArgb(15, 20, 34);
+            this.txtText.Text = data;
+            this.txtText.Visible = false;
+            //this.txtText.TextAlign = HorizontalAlignment.Center;
+
 
             // btnText
             this.btnText.AutoEllipsis = true;
@@ -74,6 +80,7 @@ namespace ArboriDragAndDrop.View.Panels
 
         public override string ToString()
         {
+           
             return btnText.Text;
         }
 

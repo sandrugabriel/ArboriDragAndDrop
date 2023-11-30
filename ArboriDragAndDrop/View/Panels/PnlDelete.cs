@@ -11,8 +11,9 @@ using System.Windows.Forms;
 
 namespace ArboriDragAndDrop.View.Panels
 {
-    public class PnlHome : Panel
+    public class PnlDelete : Panel
     {
+
 
         Form1 form;
         User user;
@@ -20,7 +21,7 @@ namespace ArboriDragAndDrop.View.Panels
         Label lblTile;
         PictureBox pct;
 
-        public PnlHome(Form1 form1, User user1)
+        public PnlDelete(Form1 form1, User user1)
         {
             form = form1;
             user = user1;
@@ -28,7 +29,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.Size = new System.Drawing.Size(1671, 925);
             this.Location = new System.Drawing.Point(102, 44);
             this.BackColor = Color.FromArgb(15, 20, 54);
-            this.Name = "PnlHome";
+            this.Name = "PnlDelete";
 
             this.lblTile = new Label();
             this.pct = new PictureBox();
@@ -42,7 +43,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.lblTile.Name = "lblTile";
             this.lblTile.Size = new System.Drawing.Size(243, 36);
             this.lblTile.TabIndex = 1;
-            this.lblTile.Text = "Toate Schemele";
+            this.lblTile.Text = "Stergere Figura";
 
             // pct
             this.pct.BackColor = System.Drawing.SystemColors.Control;
@@ -72,12 +73,13 @@ namespace ArboriDragAndDrop.View.Panels
             while ((text = streamReader.ReadLine()) != null)
             {
                 if (text.Split('|')[4] == user.Id.ToString())
-                list.Add(text.Split('|')[0].ToString());
+                    list.Add(text.Split('|')[0].ToString());
             }
 
+            streamReader.Close();
             list = list.Distinct().ToList();
 
-            
+
             int x = 59, y = 200, ct = 0;
 
             foreach (string items in list)
@@ -138,20 +140,30 @@ namespace ArboriDragAndDrop.View.Panels
 
             while ((text = streamReader.ReadLine()) != null)
             {
-                if (text.Split('|')[0].ToString() == btn.Text)
+                    if (text.Split('|')[0].ToString() != btn.Text)
                     final += text + "\n";
             }
+
             streamReader.Close();
+       //     MessageBox.Show(final);
+
+            StreamWriter streamWriter = new StreamWriter(Application.StartupPath + @"/data/arbori.txt");
+            streamWriter.Write(final);
+
+            streamWriter.Close();
+
+             MessageBox.Show($"{btn.Text} s-a sters!","Succes",MessageBoxButtons.OK,MessageBoxIcon.Information);
             this.form.removePnl("PnlHome");
             this.form.removePnl("PnlSlideTileBar");
             this.form.removePnl("PnlAdd");
             this.form.removePnl("PnlLoad");
             this.form.removePnl("PnlDelete");
-            this.form.Controls.Add(new PnlSlideTileBar(form,user));
-            this.form.Controls.Add(new PnlLoad(form,user,final));
-          //  MessageBox.Show(final);
-           
+            this.form.Controls.Add(new PnlSlideTileBar(form, user));
+            this.form.Controls.Add(new PnlHome(form, user));
+
         }
+
+
 
     }
 }

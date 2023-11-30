@@ -660,6 +660,9 @@ namespace ArboriDragAndDrop.View.Panels
                 {
                     this.form.removePnl("PnlLogin");
                     User user = serviceUsers.getByEmailPass(txtEmail.Text, txtPass.Text);
+                    this.form.removePnl("PnlSignUp");
+                    this.form.Controls.Add(new PnlSlideTileBar(form, user));
+                    this.form.Controls.Add(new PnlHome(form, user));
                 }
 
             }

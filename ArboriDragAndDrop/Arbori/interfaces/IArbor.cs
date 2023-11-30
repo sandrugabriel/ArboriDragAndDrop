@@ -23,12 +23,14 @@ namespace ArboriDragAndDrop.Arbori.interfaces
 
         void setT(T luat, T pus);
 
-        void saveFisier(TreeNode<T> node, string name);
+        void saveFisier(TreeNode<T> node, string name, string user);
 
         void load(string name);
 
         T findParinte(T data);
 
         void afisareParinte(T data);
+
+        string update(TreeNode<T> node,string name, string user);
     }
 }

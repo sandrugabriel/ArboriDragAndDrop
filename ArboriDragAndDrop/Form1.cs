@@ -18,11 +18,12 @@ namespace ArboriDragAndDrop
         public Form1()
         {
             InitializeComponent();
-            User user = new User("1|gabi|gabi@email.com|gabi1234");
+/*            User user = new User("1|gabi|gabi@email.com|gabi1234");
 
-            this.Controls.Add(new PnlSlideTileBar(this,user));
-            this.Controls.Add(new PnlHome(this,user));
-
+             this.Controls.Add(new PnlSlideTileBar(this,user));
+             this.Controls.Add(new PnlHome(this,user));
+*/
+           this.Controls.Add(new PnlLogin(this));
         }
 
         public void removePnl(string pnl)

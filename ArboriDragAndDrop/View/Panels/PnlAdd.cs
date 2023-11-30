@@ -1,9 +1,11 @@
 ﻿using ArboriDragAndDrop.Arbori;
 using ArboriDragAndDrop.Arbori.interfaces;
+using ArboriDragAndDrop.Users.Models;
 using Bunifu.Framework.UI;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ArboriDragAndDrop.View.Panels
 {
-    public class PnlDinamicCards : Panel
+    public class PnlAdd : Panel
     {
 
         Form1 form;
@@ -38,17 +40,23 @@ namespace ArboriDragAndDrop.View.Panels
 
         TextBox txtName;
         Label lblName;
+        User user;
 
-        public PnlDinamicCards(Form1 form1) {
-        
+        public PnlAdd(Form1 form1, User user1)
+        {
+
             this.form = form1;
+            this.user = user1;
 
-            this.Name = "PnlDinamicCards";
-            this.Size = new System.Drawing.Size(1409, 795);
+            this.Name = "PnlAdd";
+            this.Size = new System.Drawing.Size(1671, 925);
             this.Font = new System.Drawing.Font("Century Gothic", 12);
             this.AutoScroll = true;
+            this.BackColor = Color.FromArgb(15, 20, 54);
+            this.Location = new Point(105, 44);
+
             nr = 1;
-            this.cardPrimul = new PnlCard(form,nr.ToString());
+            this.cardPrimul = new PnlCard(form, "");
             this.btnAddLeft = new Button();
             this.btnAddRight = new Button();
             this.eliBtnLeft = new BunifuElipse();
@@ -58,7 +66,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.txtName = new TextBox();
             this.eliTxt = new BunifuElipse();
             this.lblName = new Label();
-            
+
             this.Controls.Add(this.cardPrimul);
             this.Controls.Add(btnAddLeft);
             this.Controls.Add(btnAddRight);
@@ -83,64 +91,68 @@ namespace ArboriDragAndDrop.View.Panels
             eliBtnRight.ElipseRadius = 25;
 
             //cardPrimul
-            this.cardPrimul.Location = new System.Drawing.Point(730, 130);
+            this.cardPrimul.Location = new System.Drawing.Point(730, 250);
             this.cardPrimul.txtText.Visible = true;
             // this.cardPrimul.Size = new System.Drawing.Size(270,77);
 
             //lblName
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(400, 35);
+            this.lblName.Location = new System.Drawing.Point(380, 55);
             this.lblName.Text = "Name: ";
+            this.lblName.ForeColor = System.Drawing.Color.White;
             this.lblName.Font = new System.Drawing.Font("Century Gothic", 23);
 
             //btnAddRight
-            this.btnAddRight.Location = new System.Drawing.Point(958, 247);
+            this.btnAddRight.Location = new System.Drawing.Point(730 + 195, 250 + 85);
             this.btnAddRight.Size = new System.Drawing.Size(184, 77);
             this.btnAddRight.FlatAppearance.BorderSize = 0;
             this.btnAddRight.FlatStyle = FlatStyle.Flat;
             this.btnAddRight.Text = "Add child";
             this.btnAddRight.Cursor = Cursors.Hand;
             this.btnAddRight.Click += new EventHandler(btnAddRight_Click);
-            this.btnAddRight.BackColor = System.Drawing.Color.DimGray;
+            this.btnAddRight.BackColor = System.Drawing.Color.FromArgb(15, 20, 35);
+            this.btnAddRight.ForeColor = System.Drawing.Color.White;
 
             //btnAddLeft
-            this.btnAddLeft.Location = new System.Drawing.Point(556, 247);
+            this.btnAddLeft.Location = new System.Drawing.Point(730 - 195, 250 + 85);
             this.btnAddLeft.Size = new System.Drawing.Size(184, 77);
             this.btnAddLeft.FlatAppearance.BorderSize = 0;
             this.btnAddLeft.FlatStyle = FlatStyle.Flat;
             this.btnAddLeft.Text = "Add child";
             this.btnAddLeft.Cursor = Cursors.Hand;
             this.btnAddLeft.Click += new EventHandler(btnAddLeft_Click);
-            this.btnAddLeft.BackColor = System.Drawing.Color.DimGray;
+            this.btnAddLeft.BackColor = System.Drawing.Color.FromArgb(15, 20, 35);
+            this.btnAddLeft.ForeColor = System.Drawing.Color.White;
 
             //btnSave
-            this.btnSave.Location = new System.Drawing.Point(580, 657);
+            this.btnSave.Location = new System.Drawing.Point(720, 700);
             this.btnSave.Text = "Save";
             this.btnSave.Size = new System.Drawing.Size(230, 87);
-            this.btnSave.BackColor = System.Drawing.Color.DimGray;
+            this.btnSave.BackColor = System.Drawing.Color.FromArgb(15, 20, 35);
             this.btnSave.FlatAppearance.BorderSize = 0;
             this.btnSave.FlatStyle = FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Century Gothic", 16);
+            this.btnSave.ForeColor = Color.White;
             this.btnSave.Click += new EventHandler(btnSave_Click);
 
             //txtName
-            this.txtName.Location = new System.Drawing.Point(540, 30);
+            this.txtName.Location = new System.Drawing.Point(540, 50);
             this.txtName.Size = new System.Drawing.Size(673, 64);
             this.txtName.Font = new System.Drawing.Font("Century Gothic", 19);
             this.txtName.TextAlign = HorizontalAlignment.Center;
             this.txtName.Multiline = true;
-            this.txtName.BackColor = System.Drawing.Color.DimGray;
+            this.txtName.BackColor = System.Drawing.Color.FromArgb(15, 20, 35);
             this.txtName.BorderStyle = BorderStyle.None;
-            this.txtName.ForeColor = System.Drawing.Color.Black;
+            this.txtName.ForeColor = System.Drawing.Color.White;
 
             ultimulLeft = cardPrimul;
             ultimulRight = cardPrimul;
 
             arbor.add(null, cardPrimul, "");
             nr++;
-           // arbor.afisareParinte(cardPrimul);
+            // arbor.afisareParinte(cardPrimul);
 
-           allCards.Add(cardPrimul);
+            allCards.Add(cardPrimul);
 
         }
 
@@ -160,9 +172,6 @@ namespace ArboriDragAndDrop.View.Panels
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.btnAddLeft.Visible = false;
-            this.btnAddRight.Visible = false;
-
             if(!txtName.Text.Equals(""))
             {
                 //arbor.afisare();
@@ -175,7 +184,7 @@ namespace ArboriDragAndDrop.View.Panels
                         allCards[i].txtText.Visible = false;
 
                     }
-                    arbor.saveFisier(arbor.getNode(), txtName.Text);
+                    arbor.saveFisier(arbor.getNode(), txtName.Text,user.Id.ToString());
                 }
                    
                 else
@@ -186,6 +195,15 @@ namespace ArboriDragAndDrop.View.Panels
 
                 MessageBox.Show("Schema s-a salvat!", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            this.btnAddLeft.Visible = false;
+            this.btnAddRight.Visible = false;
+
+                this.form.removePnl("PnlHome");
+                this.form.removePnl("PnlSlideTileBar");
+                this.form.removePnl("PnlAdd");
+                this.form.removePnl("PnlLoad");
+                this.form.Controls.Add(new PnlSlideTileBar(form, user));
+                this.form.Controls.Add(new PnlHome(form, user));
             }
             else MessageBox.Show("Nu a-ti introdus numele schemei", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -205,7 +223,7 @@ namespace ArboriDragAndDrop.View.Panels
         {
             if (ct == 1)
             {
-                PnlCard pnlCard = new PnlCard(form, nr.ToString());
+                PnlCard pnlCard = new PnlCard(form, "");
                 pnlCard.txtText.Visible = true;
                 pnlCard.Location = new System.Drawing.Point(ultimulLeft.Location.X - 300, ultimulLeft.Location.Y + 85);
 
@@ -222,7 +240,7 @@ namespace ArboriDragAndDrop.View.Panels
             else
             {
              
-                PnlCard pnlCard = new PnlCard(form, nr.ToString());
+                PnlCard pnlCard = new PnlCard(form, "");
                 pnlCard.txtText.Visible = true;
                 pnlCard.Location = new System.Drawing.Point(ultimulLeft.Location.X - 100*(ct/2), ultimulLeft.Location.Y + 85);
 
@@ -256,7 +274,7 @@ namespace ArboriDragAndDrop.View.Panels
                 for (int i = 0; i < ct - 1; i++)
                 {
 
-                    PnlCard pnlCard1 = new PnlCard(form, nr.ToString());
+                    PnlCard pnlCard1 = new PnlCard(form, "");
                     pnlCard1.txtText.Visible = true;
                     if (ct == 4)
                     {
@@ -317,7 +335,7 @@ namespace ArboriDragAndDrop.View.Panels
            // MessageBox.Show(ct1.ToString());
             if (ct1 == 1)
             {
-                PnlCard pnlCard = new PnlCard(form, nr.ToString());
+                PnlCard pnlCard = new PnlCard(form, "");
                 pnlCard.txtText.Visible = true;
                 pnlCard.Location = new System.Drawing.Point(ultimulRight.Location.X + 300, ultimulRight.Location.Y + 85);
 
@@ -333,7 +351,7 @@ namespace ArboriDragAndDrop.View.Panels
             }
             else
             {
-                PnlCard pnlCard = new PnlCard(form, nr.ToString());
+                PnlCard pnlCard = new PnlCard(form, "");
                 pnlCard.txtText.Visible = true;
                 pnlCard.Location = new System.Drawing.Point(ultimulRight.Location.X + 100*(ct1/2), ultimulRight.Location.Y + 85);
 
@@ -360,7 +378,7 @@ namespace ArboriDragAndDrop.View.Panels
 
                 for (int i = 0; i < ct1 - 1; i++)
                 {
-                    PnlCard pnlCard1 = new PnlCard(form, nr.ToString());
+                    PnlCard pnlCard1 = new PnlCard(form, "");
                     pnlCard1.txtText.Visible = true;
                    
                     if (ct1 == 4)
