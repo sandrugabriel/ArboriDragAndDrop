@@ -36,5 +36,55 @@ namespace ArboriDragAndDrop.View.Mockups
         {
             
         }
+
+        private void card1_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Sd");
+        }
+
+        private void card1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void card1_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void card1_DragLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void textBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            MessageBox.Show("SDf");
+        }
+
+        private void textBox1_DragDrop(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void textBox1_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void textBox1_DragLeave(object sender, EventArgs e)
+        {
+
+        }
     }
 }

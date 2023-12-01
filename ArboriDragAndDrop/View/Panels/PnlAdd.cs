@@ -156,6 +156,7 @@ namespace ArboriDragAndDrop.View.Panels
 
         }
 
+
         private bool verificare()
         {
 
@@ -179,8 +180,8 @@ namespace ArboriDragAndDrop.View.Panels
                 {
                     for (int i = 0; i < allCards.Count; i++)
                     {
-                        allCards[i].btnText.Text = allCards[i].txtText.Text;
-                        allCards[i].Name = allCards[i].btnText.Text;
+                        allCards[i].txtText.Text = allCards[i].txtText.Text;
+                        allCards[i].Name = allCards[i].txtText.Text;
                         allCards[i].txtText.Visible = false;
 
                     }
@@ -435,21 +436,21 @@ namespace ArboriDragAndDrop.View.Panels
 
         }
 
-        public Button findByText(string text)
+        public TextBox findByText(string text)
         {
 
             for (int i = 0; i < allCards.Count; i++)
             {
-                if (allCards[i].btnText.Text.Equals(text))
+                if (allCards[i].txtText.Text.Equals(text))
                 {
-                    return allCards[i].btnText;
+                    return allCards[i].txtText;
                 }
             }
 
             return null;
         }
 
-        private PnlCard getPanelFromButton(Button button)
+        private PnlCard getPanelFromButton(TextBox button)
         {
             if (button != null)
                 if (button.Tag is PnlCard associatedPanel)

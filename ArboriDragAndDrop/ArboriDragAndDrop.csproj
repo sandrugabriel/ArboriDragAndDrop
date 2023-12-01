@@ -269,9 +269,6 @@
     <Compile Include="View\Panels\PnlCard.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\Panels\PnlCards.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="View\Panels\PnlAdd.cs">
       <SubType>Component</SubType>
     </Compile>

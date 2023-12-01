@@ -126,6 +126,7 @@ namespace ArboriDragAndDrop.View.Panels
             DimanicCards();
         }
 
+
         public void DimanicCards()
         {
 
@@ -152,12 +153,12 @@ namespace ArboriDragAndDrop.View.Panels
                     pnlMain.Location = new Point(720, 200);
                     pnlLeft.Location = new Point(420, 300);
                     pnlRight.Location = new Point(1020, 300);
-                    pnlMain.btnText.DragEnter += all_DragEnter;
-                    pnlMain.btnText.DragDrop += all_DragDrop;
-                    pnlLeft.btnText.DragEnter += all_DragEnter;
-                    pnlLeft.btnText.DragDrop += all_DragDrop;
-                    pnlRight.btnText.DragEnter += all_DragEnter;
-                    pnlRight.btnText.DragDrop += all_DragDrop;
+                    pnlMain.txtText.DragEnter += all_DragEnter;
+                    pnlMain.txtText.DragDrop += all_DragDrop;
+                    pnlLeft.txtText.DragEnter += all_DragEnter;
+                    pnlLeft.txtText.DragDrop += all_DragDrop;
+                    pnlRight.txtText.DragEnter += all_DragEnter;
+                    pnlRight.txtText.DragDrop += all_DragDrop;
 
 
 
@@ -200,10 +201,10 @@ namespace ArboriDragAndDrop.View.Panels
 
                     }
 
-                    pnlLeft.btnText.DragEnter += all_DragEnter;
-                    pnlLeft.btnText.DragDrop += all_DragDrop;
-                    pnlRight.btnText.DragEnter += all_DragEnter;
-                    pnlRight.btnText.DragDrop += all_DragDrop;
+                    pnlLeft.txtText.DragEnter += all_DragEnter;
+                    pnlLeft.txtText.DragDrop += all_DragDrop;
+                    pnlRight.txtText.DragEnter += all_DragEnter;
+                    pnlRight.txtText.DragDrop += all_DragDrop;
 
                     this.Controls.Add(pnlLeft);
                     this.Controls.Add(pnlRight);
@@ -223,6 +224,7 @@ namespace ArboriDragAndDrop.View.Panels
 
         }
 
+
         private void btnS_Click(object sender, EventArgs e)
         {
 
@@ -231,9 +233,9 @@ namespace ArboriDragAndDrop.View.Panels
 
             for (int i = 0; i < allCards.Count; i++)
             {
-                allCards[i].btnText.Text = allCards[i].txtText.Text;
-                allCards[i].Name = allCards[i].btnText.Text;
-                allCards[i].txtText.Visible = false;
+                allCards[i].txtText.Text = allCards[i].txtText.Text;
+                allCards[i].Name = allCards[i].txtText.Text;
+                allCards[i].txtText.ReadOnly = false;
             }
 
 
@@ -268,6 +270,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.form.Controls.Add(new PnlLoad(form, user, arbor.update(arbor.getNode(), name, user.Id.ToString())));
         }
         
+
         private void btnEdit_Click(object sender, EventArgs e) {
 
             this.btnEdit.Visible = false;
@@ -284,20 +287,20 @@ namespace ArboriDragAndDrop.View.Panels
 
             for(int i=0;i<allCards.Count;i++)
             {
-                if (allCards[i].btnText.Text == text)
+                if (allCards[i].txtText.Text == text)
                     return allCards[i];
             }
 
             return null;
         }
 
-        Button drag;
+        TextBox drag;
         int ct = 0;
 
         private void all_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
-            if (sender is Button button && ct == 0)
+            if (sender is TextBox button && ct == 0)
             {
                 drag = button;
                 ct++;
@@ -306,14 +309,14 @@ namespace ArboriDragAndDrop.View.Panels
 
         }
 
-        public Button findByText(string text)
+        public TextBox findByText(string text)
         {
 
             for (int i = 0; i < allCards.Count; i++)
             {
-                if (allCards[i].btnText.Text.Equals(text))
+                if (allCards[i].txtText.Text.Equals(text))
                 {
-                    return allCards[i].btnText;
+                    return allCards[i].txtText;
                 }
             }
 
@@ -328,13 +331,13 @@ namespace ArboriDragAndDrop.View.Panels
             {
                 if (allCards[i].Name.Equals(name))
                 {
-                    allCards[i].btnText.Text = text;
+                    allCards[i].txtText.Text = text;
                 }
             }
 
         }
 
-        private PnlCard getPanelFromButton(Button button)
+        private PnlCard getPanelFromButton(TextBox button)
         {
             if (button != null)
                 if (button.Tag is PnlCard associatedPanel)
@@ -348,18 +351,18 @@ namespace ArboriDragAndDrop.View.Panels
         private void all_DragDrop(object sender, DragEventArgs e)
         {
 
-            string text = sender.ToString().Remove(0, 35);
-            Button btnDestinatie = findByText(text);
+            string text = sender.ToString().Remove(0, 36);
+            TextBox btnDestinatie = findByText(text);
             PnlCard destinatie = getPanelFromButton(btnDestinatie);
 
-            Button btnsura = drag;
+            TextBox btnsura = drag;
             PnlCard sura = getPanelFromButton(btnsura);
 
             arbor.setT(sura, destinatie);
-            string text1 = sura.btnText.Text;
-            string text2 = destinatie.btnText.Text;
-            destinatie.btnText.Text = text1;
-            sura.btnText.Text = text2;
+            string text1 = sura.txtText.Text;
+            string text2 = destinatie.txtText.Text;
+            destinatie.txtText.Text = text1;
+            sura.txtText.Text = text2;
             ct = 0;
             //   arbor.afisare();
         }

@@ -1,9 +1,11 @@
 ﻿using ArboriDragAndDrop.Arbori;
 using ArboriDragAndDrop.Arbori.interfaces;
 using Bunifu.Framework.UI;
+using Bunifu.UI.WinForms.BunifuButton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,7 +18,7 @@ namespace ArboriDragAndDrop.View.Panels
         Form1 form;
         string data;
 
-        public System.Windows.Forms.Button btnText;
+       // public BunifuButton btnText;
         BunifuElipse eliThis;
         public TextBox txtText;
         BunifuElipse eliTxt;
@@ -33,8 +35,9 @@ namespace ArboriDragAndDrop.View.Panels
             this.AllowDrop = true;
             this.ForeColor = System.Drawing.Color.White;
             this.MouseDown += this_MouseDown;
+            this.DoubleClick += txtText_DoubleClick;
 
-            this.btnText = new System.Windows.Forms.Button();
+           // this.btnText = new BunifuButton();
             this.eliThis = new BunifuElipse();
             this.txtText = new TextBox();
             this.eliTxt = new BunifuElipse();
@@ -46,9 +49,10 @@ namespace ArboriDragAndDrop.View.Panels
             eliThis.ElipseRadius = 25;
 
             this.Controls.Add(this.txtText);
-            this.Controls.Add(this.btnText);
+            //  this.Controls.Add(this.btnText);
 
             //txtText
+            this.txtText.AllowDrop = true;
             this.txtText.Location = new System.Drawing.Point(2, 9);
             this.txtText.Size = new System.Drawing.Size(181, 59);
             this.txtText.BorderStyle = BorderStyle.None;
@@ -57,41 +61,44 @@ namespace ArboriDragAndDrop.View.Panels
             this.txtText.ForeColor = System.Drawing.Color.White;
             this.txtText.BackColor = System.Drawing.Color.FromArgb(15, 20, 34);
             this.txtText.Text = data;
-            this.txtText.Visible = false;
-            //this.txtText.TextAlign = HorizontalAlignment.Center;
+            this.txtText.ReadOnly = true;
+            this.txtText.Tag = this;
+            this.txtText.Dock = DockStyle.Fill;
+            this.txtText.MouseDown += this_MouseDown;
+            this.txtText.DoubleClick += txtText_DoubleClick;
+            this.txtText.TextAlign = HorizontalAlignment.Center;
 
-
+        }
+/*
             // btnText
-            this.btnText.AutoEllipsis = true;
             this.btnText.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnText.Location = new System.Drawing.Point(2, 9);
             this.btnText.Name = "btnText";
             this.btnText.Size = new System.Drawing.Size(181, 59);
             this.btnText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnText.Text = data;
-            this.btnText.FlatStyle = FlatStyle.Flat;
-            this.btnText.FlatAppearance.BorderSize = 0;
             this.btnText.Dock = DockStyle.Fill;
-            this.btnText.AllowDrop = true;
-            this.btnText.Tag = this;
-
-            this.btnText.MouseDown += this_MouseDown;
-        }
+            this.btnText.AllowDrop = true;*/
 
         public override string ToString()
         {
-           
-            return btnText.Text;
+            return txtText.Text;
         }
 
         private void this_MouseDown(object sender, MouseEventArgs e)
         {
-            Button button = sender as Button;
+            TextBox txt = sender as TextBox;
 
-            this.DoDragDrop(button, DragDropEffects.Move);
+            this.DoDragDrop(txt, DragDropEffects.Move);
 
         }
 
-          
+        private void txtText_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("ad");
+            this.txtText.ReadOnly = false;
+
+        }
+
     }
 }
