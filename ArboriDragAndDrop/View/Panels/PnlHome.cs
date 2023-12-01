@@ -29,7 +29,7 @@ namespace ArboriDragAndDrop.View.Panels
             this.Location = new System.Drawing.Point(102, 44);
             this.BackColor = Color.FromArgb(15, 20, 54);
             this.Name = "PnlHome";
-            this.Dock = DockStyle.Fill;
+          //  this.Dock = DockStyle.Fill;
 
             this.lblTile = new Label();
             this.pct = new PictureBox();
